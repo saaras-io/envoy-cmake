@@ -1,0 +1,588 @@
+include(${CMAKE_SOURCE_DIR}/e/CMakeSettings.txt)
+include(${CMAKE_SOURCE_DIR}/e/CMakeTestIncludes.txt)
+
+link_directories(${CMAKE_SOURCE_DIR}/e/ext-libs)
+link_directories(${CMAKE_BINARY_DIR}/e/test/protos/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/server/http/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/server/config_validation/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/extensions/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/thread_local/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/tcp/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/http/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/ratelimit/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/grpc/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/stats/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/filesystem/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/profiler/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/config/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/runtime/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/upstream/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/request_info/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/secret/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/access_log/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/memory/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/tracing/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/router/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/buffer/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/common/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/html/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/network/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/tcp_proxy/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/protobuf/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/singleton/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/event/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/compressor/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/ssl/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/decompressor/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/api/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/common/json/)
+link_directories(${CMAKE_BINARY_DIR}/e/source/exe/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/proto/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/test_common/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/server/http/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/server/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/server/config_validation/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/integration/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/config/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/health_checkers/redis/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/access_loggers/file/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/access_loggers/http_grpc/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/tracers/dynamic_ot/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/tracers/common/ot/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/tracers/lightstep/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/tracers/zipkin/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/stats_sinks/dog_statsd/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/stats_sinks/statsd/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/stats_sinks/metrics_service/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/stats_sinks/common/statsd/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/ratelimit/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/fault/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/lua/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/gzip/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/health_check/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/grpc_json_transcoder/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/rbac/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/ext_authz/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/grpc_web/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/router/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/cors/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/jwt_authn/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/buffer/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/dynamo/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/ip_tagging/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/grpc_http1_bridge/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/http/squash/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/listener/proxy_protocol/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/common/lua/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/common/rbac/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/common/ext_authz/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/ratelimit/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/ext_authz/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/http_connection_manager/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/client_ssl_auth/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/mongo_proxy/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/redis_proxy/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/extensions/filters/network/tcp_proxy/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/coverage/gcc_only_test/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/thread_local/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/http/http2/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/http/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/http/http1/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/ratelimit/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/grpc/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/stats/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/filesystem/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/config/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/runtime/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/upstream/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/tracing/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/router/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/buffer/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/html/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/tcp_proxy/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/protobuf/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/singleton/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/event/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/compressor/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/ssl/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/decompressor/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/api/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/common/json/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/tools/router_check/json/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/config_test/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/exe/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/thread_local/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/http/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/ratelimit/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/grpc/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/stats/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/filesystem/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/server/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/config/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/runtime/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/upstream/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/access_log/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/tracing/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/local_info/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/router/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/init/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/buffer/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/network/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/event/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/ssl/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/)
+link_directories(${CMAKE_BINARY_DIR}/e/test/mocks/api/)
+
+set(project_name    e-test)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++1y -Wl,-V")
+add_definitions(${CMAKE_C_FLAGS})
+
+set(test_common_lib_path        ${CMAKE_BINARY_DIR}/e/test/test_common/)
+set(ev_test_binary_root_dir		${CMAKE_BINARY_DIR}/e/test/)
+set(sig_action_lib_path         ${CMAKE_BINARY_DIR}/e/source/exe/)
+
+set(rsync_cmd                   rsync -auv)
+
+add_subdirectory(proto)
+add_subdirectory(test_common/)
+add_subdirectory(server/http/)
+add_subdirectory(server/)
+add_subdirectory(server/config_validation/)
+add_subdirectory(integration/)
+add_subdirectory(config/)
+add_subdirectory(extensions/)
+add_subdirectory(extensions/health_checkers/redis/)
+add_subdirectory(extensions/access_loggers/file/)
+add_subdirectory(extensions/access_loggers/http_grpc/)
+add_subdirectory(extensions/tracers/dynamic_ot/)
+add_subdirectory(extensions/tracers/common/ot/)
+add_subdirectory(extensions/tracers/lightstep/)
+add_subdirectory(extensions/tracers/zipkin/)
+add_subdirectory(extensions/stats_sinks/dog_statsd/)
+add_subdirectory(extensions/stats_sinks/statsd/)
+add_subdirectory(extensions/stats_sinks/metrics_service/)
+add_subdirectory(extensions/stats_sinks/common/statsd/)
+add_subdirectory(extensions/filters/http/ratelimit/)
+add_subdirectory(extensions/filters/http/fault/)
+add_subdirectory(extensions/filters/http/lua/)
+add_subdirectory(extensions/filters/http/gzip/)
+add_subdirectory(extensions/filters/http/health_check/)
+add_subdirectory(extensions/filters/http/grpc_json_transcoder/)
+add_subdirectory(extensions/filters/http/rbac/)
+add_subdirectory(extensions/filters/http/ext_authz/)
+add_subdirectory(extensions/filters/http/grpc_web/)
+add_subdirectory(extensions/filters/http/router/)
+add_subdirectory(extensions/filters/http/cors/)
+add_subdirectory(extensions/filters/http/jwt_authn/)
+add_subdirectory(extensions/filters/http/buffer/)
+add_subdirectory(extensions/filters/http/dynamo/)
+add_subdirectory(extensions/filters/http/ip_tagging/)
+add_subdirectory(extensions/filters/http/grpc_http1_bridge/)
+add_subdirectory(extensions/filters/http/squash/)
+add_subdirectory(extensions/filters/listener/tls_inspector/)
+add_subdirectory(extensions/filters/listener/proxy_protocol/)
+add_subdirectory(extensions/filters/common/lua/)
+add_subdirectory(extensions/filters/common/rbac/)
+add_subdirectory(extensions/filters/common/ext_authz/)
+add_subdirectory(extensions/filters/network/ratelimit/)
+add_subdirectory(extensions/filters/network/ext_authz/)
+add_subdirectory(extensions/filters/network/http_connection_manager/)
+add_subdirectory(extensions/filters/network/client_ssl_auth/)
+add_subdirectory(extensions/filters/network/mongo_proxy/)
+add_subdirectory(extensions/filters/network/redis_proxy/)
+add_subdirectory(extensions/filters/network/tcp_proxy/)
+add_subdirectory(fuzz/)
+add_subdirectory(coverage/gcc_only_test/)
+add_subdirectory(common/thread_local/)
+add_subdirectory(common/http/)
+add_subdirectory(common/http/http2/)
+add_subdirectory(common/http/http1/)
+add_subdirectory(common/ratelimit/)
+add_subdirectory(common/grpc/)
+add_subdirectory(common/stats/)
+add_subdirectory(common/filesystem/)
+add_subdirectory(common/config/)
+add_subdirectory(common/runtime/)
+add_subdirectory(common/upstream/)
+#add_subdirectory(common/request_info/)
+add_subdirectory(common/access_log/)
+add_subdirectory(common/tracing/)
+add_subdirectory(common/router/)
+add_subdirectory(common/buffer/)
+add_subdirectory(common/common/)
+add_subdirectory(common/html/)
+add_subdirectory(common/network/)
+add_subdirectory(common/tcp_proxy/)
+add_subdirectory(common/protobuf/)
+add_subdirectory(common/singleton/)
+add_subdirectory(common/event/)
+add_subdirectory(common/compressor/)
+add_subdirectory(common/ssl/)
+add_subdirectory(common/decompressor/)
+add_subdirectory(common/api/)
+add_subdirectory(common/json/)
+add_subdirectory(tools/schema_validator/)
+add_subdirectory(tools/router_check/)
+add_subdirectory(tools/router_check/json/)
+add_subdirectory(tools/config_load_check/)
+add_subdirectory(config_test/)
+add_subdirectory(exe/)
+add_subdirectory(mocks/thread_local/)
+add_subdirectory(mocks/http/)
+add_subdirectory(mocks/ratelimit/)
+add_subdirectory(mocks/)
+add_subdirectory(mocks/grpc/)
+add_subdirectory(mocks/stats/)
+add_subdirectory(mocks/filesystem/)
+add_subdirectory(mocks/server/)
+add_subdirectory(mocks/config/)
+add_subdirectory(mocks/runtime/)
+add_subdirectory(mocks/upstream/)
+#add_subdirectory(mocks/request_info/)
+add_subdirectory(mocks/access_log/)
+add_subdirectory(mocks/tracing/)
+add_subdirectory(mocks/local_info/)
+add_subdirectory(mocks/router/)
+add_subdirectory(mocks/init/)
+add_subdirectory(mocks/buffer/)
+add_subdirectory(mocks/network/)
+add_subdirectory(mocks/event/)
+add_subdirectory(mocks/ssl/)
+add_subdirectory(mocks/api/)
+
+file(GLOB
+    sources
+    ${CMAKE_SOURCE_DIR}/e/test/*.h
+    ${CMAKE_SOURCE_DIR}/e/test/*.c
+    ${CMAKE_SOURCE_DIR}/e/test/*.cc
+)
+
+enable_testing()
+add_executable(${project_name} ${sources})
+
+add_custom_command(TARGET ${project_name}
+    PRE_BUILD
+    COMMAND echo " --- CUSTOM COMMAND ---"
+    COMMAND touch ${CMAKE_SOURCE_DIR}/e/test/main.cc
+    )
+
+set_target_properties(${project_name} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${project_name}
+	-Wl,-whole-archive -le-e-test-proto -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-test_common -Wl,-no-whole-archive
+	e-e-test-server-http
+	e-e-test-server
+	-Wl,-whole-archive -le-e-test-server-config_validation -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-config -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-extensions-access_loggers-file -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-extensions-access_loggers-http_grpc -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-tracers-common-ot -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-extensions-tracers-lightstep -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-extensions-tracers-zipkin -Wl,-no-whole-archive
+    #-Wl,-whole-archive -le-e-test-extensions-stats_sinks-dog_statsd -Wl,-no-whole-archive
+    #-Wl,-whole-archive -le-e-test-extensions-stats_sinks-metrics_service -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-ratelimit -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-fault -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-lua -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-gzip -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-health_check -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-grpc_json_transcoder -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-rbac -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-ext_authz -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-grpc_web -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-router -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-cors -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-jwt_authn -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-buffer -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-dynamo -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-ip_tagging -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-grpc_http1_bridge -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-http-squash -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-listener-proxy_protocol -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-common-lua -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-common-rbac -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-common-ext_authz -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-ratelimit -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-ext_authz -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-http_connection_manager -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-client_ssl_auth -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-mongo_proxy -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-test-extensions-filters-network-tcp_proxy -Wl,-no-whole-archive
+    -Wl,-whole-archive -lluajit -Wl,-no-whole-archive
+	e-e-test-extensions-stats_sinks-statsd
+	e-test-extensions-stats_sinks-common-statsd
+	e-test-extensions-filters-network-redis_proxy
+	e-e-test-extensions-health_checkers-redis
+	e-e-test-extensions-tracers-dynamic_ot
+	e-e-test-extensions
+	-Wl,-whole-archive -le-e-test-coverage-gcc_only_test -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-thread_local -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-ratelimit -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-grpc -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-filesystem -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-config -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-runtime -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-tracing -Wl,-no-whole-archive
+	e-e-test-common-http-http1
+	e-e-test-common-http-http2
+	e-e-test-common-http
+	-Wl,-whole-archive -le-e-test-common-buffer -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-html -Wl,-no-whole-archive
+	e-e-test-common-protobuf
+	-Wl,-whole-archive -le-e-test-common-singleton -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-event -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-compressor -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-ssl -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-decompressor -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-api -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-common-json -Wl,-no-whole-archive
+	e-e-test-common-tcp_proxy
+	e-e-test-common-upstream
+	-Wl,-whole-archive -le-e-test-tools-router_check-json -Wl,-no-whole-archive
+	e-e-test-integration
+	-Wl,-whole-archive -le-e-test-config_test -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-exe -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-thread_local -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-http -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-ratelimit -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-grpc -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-stats -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-filesystem -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-server -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-config -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-runtime -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-upstream -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-access_log -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-tracing -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-local_info -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-router -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-init -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-buffer -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-network -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-event -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-ssl -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-test-mocks-api -Wl,-no-whole-archive
+	e-e-test-mocks
+    e-e-source-exe-lib
+    -Wl,-whole-archive -lev_protos-data-plane-api -Wl,-no-whole-archive
+    -Wl,-whole-archive -ldl -Wl,-no-whole-archive
+    e-e-source-common-memory
+	e-e-source-common-singleton
+	e-e-source-common-thread_local
+	-Wl,-whole-archive -le-e-source-common-ssl -Wl,-no-whole-archive
+	e-e-source-common-ratelimit
+    -Wl,-whole-archive -le-e-source-common-tcp -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-source-common-upstream -Wl,-no-whole-archive
+    e-e-source-common-html
+    e-e-source-common-profiler
+    -Wl,-whole-archive -le-e-source-common-event -Wl,-no-whole-archive
+    e-e-source-common-json
+	yaml-cpp
+    e-e-source-common-filesystem
+    e-e-source-common-api
+    e-e-source-common-router
+    e-e-source-common-grpc
+    e-e-source-common-stats
+    -Wl,-whole-archive -le-e-source-common-config -Wl,-no-whole-archive
+    e-e-source-server-http
+	e-e-test-test_common
+    -Wl,-whole-archive -le-common -Wl,-no-whole-archive
+	-Wl,-whole-archive -le-e-source-extensions  -Wl,-no-whole-archive
+    e-e-source-common-http
+	e-e-source-common-tcp_proxy
+	e-e-source-common-compressor
+    -Wl,-whole-archive -le-e-source-common-decompressor -Wl,-no-whole-archive
+    -Wl,-whole-archive -lz -Wl,-no-whole-archive
+    e-e-source-common-access_log
+    e-e-source-common-tracing
+    -Wl,-whole-archive -llightstep_tracer -Wl,-no-whole-archive
+    opentracing_mocktracer-static
+	opentracing
+    e-e-source-common-runtime
+    -Wl,-whole-archive -le-e-source-common-network -Wl,-no-whole-archive
+    nghttp2
+    rt
+    -Wl,-whole-archive -le-e-source-common-protobuf -Wl,-no-whole-archive
+    -Wl,-whole-archive -lprotobuf -Wl,-no-whole-archive
+	absl_utility
+	absl_time
+	absl_synchronization
+	absl_algorithm
+	absl_bad_optional_access
+	absl_bad_any_cast
+	absl_span
+	absl_optional
+	absl_any
+	absl_strings
+	absl_int128
+	absl_numeric
+	absl_malloc_internal
+	absl_throw_delegate
+	absl_spinlock_wait
+	absl_base
+	absl_dynamic_annotations
+	absl_meta
+	absl_stacktrace
+	absl_leak_check
+	absl_debugging
+    -Wl,-whole-archive -lcares -Wl,-no-whole-archive
+    e-e-source-common-buffer
+    pthread
+    event_pthreads2
+    event_core2
+    event2
+    event_extra2
+    gtest
+    gmock
+    gpr
+    grpc++_unsecure
+    grpc
+    grpc++
+	stdc++fs
+    sig_action
+    protobuf-mutator-libfuzzer
+    e-e-source-common-secret
+    #e-e-external-http-parser
+    crypto
+    ssl
+)
+
+#TODO: Add e-test dependencies
+
+add_dependencies(${project_name}
+	e-e-source-common-upstream
+	e-e-test-common-api
+	e-e-test-common-buffer
+	e-e-test-common-compressor
+	e-e-test-common-config
+	e-e-test-common-decompressor
+	e-e-test-common-event
+	e-e-test-common-filesystem
+	e-e-test-common-grpc
+	e-e-test-common-html
+	e-e-test-common-http-http1
+	e-e-test-common-json
+	e-e-test-common-protobuf
+	e-e-test-common-ratelimit
+    #e-e-test-common-request_info
+    #e-e-test-common-router
+	e-e-test-common-runtime
+	e-e-test-common-singleton
+	e-e-test-common-ssl
+    #e-e-test-common-stats
+	e-e-test-common-thread_local
+	e-e-test-common-tracing
+	e-e-test-config
+	e-e-test-config_test
+	e-e-test-coverage-gcc_only_test
+	e-e-test-exe
+	e-e-test-extensions-access_loggers-file
+	e-e-test-extensions-access_loggers-http_grpc
+    #e-e-test-extensions-stats_sinks-dog_statsd
+    #e-e-test-extensions-stats_sinks-metrics_service
+	e-e-test-extensions-tracers-lightstep
+	e-e-test-extensions-tracers-zipkin
+	e-e-test-integration
+	e-e-test-mocks-access_log
+	e-e-test-mocks-api
+	e-e-test-mocks-buffer
+	e-e-test-mocks-config
+	e-e-test-mocks-event
+	e-e-test-mocks-filesystem
+	e-e-test-mocks-grpc
+	e-e-test-mocks-http
+	e-e-test-mocks-init
+	e-e-test-mocks-local_info
+	e-e-test-mocks-network
+	e-e-test-mocks-ratelimit
+    #e-e-test-mocks-request_info
+	e-e-test-mocks-router
+	e-e-test-mocks-runtime
+	e-e-test-mocks-server
+	e-e-test-mocks-ssl
+	e-e-test-mocks-stats
+	e-e-test-mocks-thread_local
+	e-e-test-mocks-tracing
+	e-e-test-mocks-upstream
+	e-e-test-proto
+	e-e-test-server-config_validation
+	e-e-test-server-http
+	e-e-test-test_common
+	e-e-test-tools-router_check-json
+	e-test-extensions-filters-common-ext_authz
+	e-test-extensions-filters-common-lua
+	e-test-extensions-filters-common-rbac
+	e-test-extensions-filters-http-buffer
+	e-test-extensions-filters-http-cors
+	e-test-extensions-filters-http-dynamo
+	e-test-extensions-filters-http-ext_authz
+	e-test-extensions-filters-http-fault
+	e-test-extensions-filters-http-grpc_http1_bridge
+	e-test-extensions-filters-http-grpc_json_transcoder
+	e-test-extensions-filters-http-grpc_web
+	e-test-extensions-filters-http-gzip
+	e-test-extensions-filters-http-health_check
+	e-test-extensions-filters-http-ip_tagging
+	e-test-extensions-filters-http-jwt_authn
+	e-test-extensions-filters-http-lua
+	e-test-extensions-filters-http-ratelimit
+	e-test-extensions-filters-http-rbac
+	e-test-extensions-filters-http-router
+	e-test-extensions-filters-http-squash
+	e-test-extensions-filters-listener-proxy_protocol
+	e-test-extensions-filters-network-client_ssl_auth
+	e-test-extensions-filters-network-ext_authz
+	e-test-extensions-filters-network-http_connection_manager
+	e-test-extensions-filters-network-mongo_proxy
+	e-test-extensions-filters-network-ratelimit
+	e-test-extensions-filters-network-tcp_proxy
+	e-test-extensions-tracers-common-ot
+    #e-e-external-grpc-httpjson-transcoding
+	e-e-source-common-compressor
+	e-e-source-common-ratelimit
+	e-e-source-common-singleton
+	e-e-source-common-ssl
+	e-e-source-common-tcp_proxy
+	e-e-source-common-thread_local
+	e-e-source-extensions
+	e-e-test-common-http
+	e-e-test-common-http-http2
+	e-e-test-common-tcp_proxy
+	e-e-test-common-upstream
+	e-e-test-extensions
+	e-e-test-extensions-health_checkers-redis
+	e-e-test-extensions-stats_sinks-statsd
+	e-e-test-extensions-tracers-dynamic_ot
+	e-e-test-mocks
+	e-e-test-server
+	e-e-test-test_common
+	e-test-extensions-filters-network-redis_proxy
+	e-test-extensions-stats_sinks-common-statsd
+	e-e-source-common-config
+	e-e-source-common-decompressor
+	e-e-source-common-event
+	e-e-source-common-network
+	e-e-source-common-protobuf
+	e-e-source-server
+    #e-ev_protos-data-plane-api
+    e-e-external-http-parser
+	e-e-source-common-access_log
+	e-e-source-common-api
+	e-e-source-common-buffer
+	e-e-source-common-filesystem
+	e-e-source-common-grpc
+	e-e-source-common-html
+	e-e-source-common-http
+	e-e-source-common-json
+	e-e-source-common-memory
+	e-e-source-common-profiler
+    #e-e-source-common-request_info
+	e-e-source-common-router
+	e-e-source-common-runtime
+	e-e-source-common-stats
+	e-e-source-common-tracing
+	e-e-source-server-http
+)

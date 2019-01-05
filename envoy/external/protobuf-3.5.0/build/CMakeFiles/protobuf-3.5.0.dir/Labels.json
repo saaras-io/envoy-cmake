@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/CMakeFiles/protobuf-3.5.0"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/CMakeFiles/protobuf-3.5.0.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/CMakeFiles/protobuf-3.5.0-complete.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-install.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-mkdir.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-download.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-update.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-patch.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-configure.rule"
+		},
+		{
+			"file" : "/home/ubuntu/falcon5/falcon/ev/external/protobuf-3.5.0/build/protobuf-3.5.0-prefix/src/protobuf-3.5.0-stamp/protobuf-3.5.0-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"protobuf-3.5.0"
+		],
+		"name" : "protobuf-3.5.0"
+	}
+}

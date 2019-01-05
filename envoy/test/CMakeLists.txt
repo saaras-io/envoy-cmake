@@ -1,0 +1,532 @@
+include(${CMAKE_SOURCE_DIR}/CMakeSettings.txt)
+include(${CMAKE_SOURCE_DIR}/CMakeTestIncludes.txt)
+
+set(project_name    envoy-test)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++1y -Wl,-V")
+add_definitions(${CMAKE_C_FLAGS})
+
+set(test_common_lib_path        ${CMAKE_BINARY_DIR}/e/test/test_common/)
+set(ev_test_binary_root_dir		${CMAKE_BINARY_DIR}/e/test/)
+set(sig_action_lib_path         ${CMAKE_BINARY_DIR}/e/source/exe/)
+
+set(rsync_cmd                   rsync -auv)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/ext-libs
+    ${CMAKE_BINARY_DIR}/source/common/access_log
+    ${CMAKE_BINARY_DIR}/source/common/api
+    ${CMAKE_BINARY_DIR}/source/common/buffer
+    ${CMAKE_BINARY_DIR}/source/common/common
+    ${CMAKE_BINARY_DIR}/source/common/compressor
+    ${CMAKE_BINARY_DIR}/source/common/config
+    ${CMAKE_BINARY_DIR}/source/common/decompressor
+    ${CMAKE_BINARY_DIR}/source/common/event
+    ${CMAKE_BINARY_DIR}/source/common/filesystem
+    ${CMAKE_BINARY_DIR}/source/common/grpc
+    ${CMAKE_BINARY_DIR}/source/common/html
+    ${CMAKE_BINARY_DIR}/source/common/http
+    ${CMAKE_BINARY_DIR}/source/common/json
+    ${CMAKE_BINARY_DIR}/source/common/memory
+    ${CMAKE_BINARY_DIR}/source/common/network
+    ${CMAKE_BINARY_DIR}/source/common/profiler
+    ${CMAKE_BINARY_DIR}/source/common/protobuf
+    ${CMAKE_BINARY_DIR}/source/common/ratelimit
+    ${CMAKE_BINARY_DIR}/source/common/request_info
+    ${CMAKE_BINARY_DIR}/source/common/request_info
+    ${CMAKE_BINARY_DIR}/source/common/router
+    ${CMAKE_BINARY_DIR}/source/common/runtime
+    ${CMAKE_BINARY_DIR}/source/common/secret
+    ${CMAKE_BINARY_DIR}/source/common/singleton
+    ${CMAKE_BINARY_DIR}/source/common/ssl
+    ${CMAKE_BINARY_DIR}/source/common/stats
+    ${CMAKE_BINARY_DIR}/source/common/tcp
+    ${CMAKE_BINARY_DIR}/source/common/tcp_proxy
+    ${CMAKE_BINARY_DIR}/source/common/thread_local
+    ${CMAKE_BINARY_DIR}/source/common/tracing
+    ${CMAKE_BINARY_DIR}/source/common/upstream
+    ${CMAKE_BINARY_DIR}/source/exe
+    ${CMAKE_BINARY_DIR}/source/extensions
+    ${CMAKE_BINARY_DIR}/source/server
+    ${CMAKE_BINARY_DIR}/source/server/config_validation
+    ${CMAKE_BINARY_DIR}/source/server/http
+    ${CMAKE_BINARY_DIR}/test/mocks/api
+    ${CMAKE_BINARY_DIR}/test/proto
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/algorithm
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/base
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/container
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/debugging
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/memory
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/meta
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/numeric
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/strings
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/synchronization
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/time
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/types
+    ${CMAKE_BINARY_DIR}/external/abseil-cpp/absl/utility
+    ${CMAKE_BINARY_DIR}/external/backward-cpp
+    ${CMAKE_BINARY_DIR}/external/cctz
+    ${CMAKE_BINARY_DIR}/external/fmt-4.1.0/fmt
+    ${CMAKE_BINARY_DIR}/external/googletest/googlemock
+    ${CMAKE_BINARY_DIR}/external/googletest/googlemock/gtest
+    ${CMAKE_BINARY_DIR}/external/grpc
+    ${CMAKE_BINARY_DIR}/external/grpc-httpjson-transcoding
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/benchmark/src
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/benchmark/test
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/cares/cares/lib
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/gflags
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/protobuf
+    ${CMAKE_BINARY_DIR}/external/grpc/third_party/zlib
+    ${CMAKE_BINARY_DIR}/external/http-parser
+    ${CMAKE_BINARY_DIR}/external/jwt_verify_lib
+    ${CMAKE_BINARY_DIR}/external/libprotobuf_mutator/src
+    ${CMAKE_BINARY_DIR}/external/libprotobuf_mutator/src/libfuzzer
+    ${CMAKE_BINARY_DIR}/external/lightstep-tracer-cpp
+    ${CMAKE_BINARY_DIR}/external/opentracing-cpp
+    ${CMAKE_BINARY_DIR}/external/opentracing-cpp/mocktracer
+    ${CMAKE_BINARY_DIR}/external/yaml-cpp
+    ${CMAKE_SOURCE_DIR}/external/luajit-2.0/src
+    ${CMAKE_SOURCE_DIR}/external/xxHash
+    ${CMAKE_SOURCE_DIR}/external/libcircllhist/src
+    ${CMAKE_BINARY_DIR}/external/googletest/googlemock/
+    ${CMAKE_BINARY_DIR}/api/
+)
+
+#add_subdirectory(proto)
+add_subdirectory(test_common/)
+add_subdirectory(server/http/)
+add_subdirectory(server/)
+add_subdirectory(server/config_validation/)
+add_subdirectory(integration/)
+add_subdirectory(config/)
+add_subdirectory(extensions/)
+add_subdirectory(extensions/health_checkers/redis/)
+add_subdirectory(extensions/access_loggers/file/)
+add_subdirectory(extensions/access_loggers/http_grpc/)
+add_subdirectory(extensions/tracers/dynamic_ot/)
+add_subdirectory(extensions/tracers/common/ot/)
+add_subdirectory(extensions/tracers/lightstep/)
+add_subdirectory(extensions/tracers/zipkin/)
+add_subdirectory(extensions/stats_sinks/dog_statsd/)
+add_subdirectory(extensions/stats_sinks/statsd/)
+add_subdirectory(extensions/stats_sinks/metrics_service/)
+add_subdirectory(extensions/stats_sinks/common/statsd/)
+add_subdirectory(extensions/filters/http/ratelimit/)
+add_subdirectory(extensions/filters/http/fault/)
+add_subdirectory(extensions/filters/http/lua/)
+add_subdirectory(extensions/filters/http/gzip/)
+add_subdirectory(extensions/filters/http/health_check/)
+add_subdirectory(extensions/filters/http/grpc_json_transcoder/)
+add_subdirectory(extensions/filters/http/rbac/)
+add_subdirectory(extensions/filters/http/ext_authz/)
+add_subdirectory(extensions/filters/http/grpc_web/)
+add_subdirectory(extensions/filters/http/router/)
+add_subdirectory(extensions/filters/http/cors/)
+add_subdirectory(extensions/filters/http/jwt_authn/)
+add_subdirectory(extensions/filters/http/buffer/)
+add_subdirectory(extensions/filters/http/dynamo/)
+add_subdirectory(extensions/filters/http/ip_tagging/)
+add_subdirectory(extensions/filters/http/grpc_http1_bridge/)
+add_subdirectory(extensions/filters/http/squash/)
+add_subdirectory(extensions/filters/listener/tls_inspector/)
+add_subdirectory(extensions/filters/listener/proxy_protocol/)
+add_subdirectory(extensions/filters/common/lua/)
+add_subdirectory(extensions/filters/common/rbac/)
+add_subdirectory(extensions/filters/common/ext_authz/)
+add_subdirectory(extensions/filters/network/ratelimit/)
+add_subdirectory(extensions/filters/network/ext_authz/)
+add_subdirectory(extensions/filters/network/http_connection_manager/)
+add_subdirectory(extensions/filters/network/client_ssl_auth/)
+add_subdirectory(extensions/filters/network/mongo_proxy/)
+add_subdirectory(extensions/filters/network/redis_proxy/)
+add_subdirectory(extensions/filters/network/tcp_proxy/)
+add_subdirectory(fuzz/)
+add_subdirectory(coverage/gcc_only_test/)
+add_subdirectory(common/thread_local/)
+add_subdirectory(common/http/)
+add_subdirectory(common/http/http2/)
+add_subdirectory(common/http/http1/)
+add_subdirectory(common/ratelimit/)
+add_subdirectory(common/grpc/)
+add_subdirectory(common/stats/)
+add_subdirectory(common/filesystem/)
+add_subdirectory(common/config/)
+add_subdirectory(common/runtime/)
+add_subdirectory(common/upstream/)
+#add_subdirectory(common/request_info/)
+add_subdirectory(common/access_log/)
+add_subdirectory(common/tracing/)
+add_subdirectory(common/router/)
+add_subdirectory(common/buffer/)
+add_subdirectory(common/common/)
+add_subdirectory(common/html/)
+add_subdirectory(common/network/)
+add_subdirectory(common/tcp_proxy/)
+add_subdirectory(common/protobuf/)
+add_subdirectory(common/singleton/)
+add_subdirectory(common/event/)
+add_subdirectory(common/compressor/)
+add_subdirectory(common/ssl/)
+add_subdirectory(common/decompressor/)
+add_subdirectory(common/api/)
+add_subdirectory(common/json/)
+add_subdirectory(tools/schema_validator/)
+add_subdirectory(tools/router_check/)
+add_subdirectory(tools/router_check/json/)
+add_subdirectory(tools/config_load_check/)
+add_subdirectory(config_test/)
+add_subdirectory(exe/)
+add_subdirectory(mocks/thread_local/)
+add_subdirectory(mocks/http/)
+add_subdirectory(mocks/ratelimit/)
+add_subdirectory(mocks/)
+add_subdirectory(mocks/grpc/)
+add_subdirectory(mocks/stats/)
+add_subdirectory(mocks/filesystem/)
+add_subdirectory(mocks/server/)
+add_subdirectory(mocks/config/)
+add_subdirectory(mocks/runtime/)
+add_subdirectory(mocks/upstream/)
+#add_subdirectory(mocks/request_info/)
+add_subdirectory(mocks/access_log/)
+add_subdirectory(mocks/tracing/)
+add_subdirectory(mocks/local_info/)
+add_subdirectory(mocks/router/)
+add_subdirectory(mocks/init/)
+add_subdirectory(mocks/buffer/)
+add_subdirectory(mocks/network/)
+add_subdirectory(mocks/event/)
+add_subdirectory(mocks/ssl/)
+add_subdirectory(mocks/api/)
+
+file(GLOB
+    sources
+    ${CMAKE_SOURCE_DIR}/test/*.h
+    ${CMAKE_SOURCE_DIR}/test/*.c
+    ${CMAKE_SOURCE_DIR}/test/*.cc
+)
+
+enable_testing()
+add_executable(${project_name} ${sources})
+
+add_custom_command(TARGET ${project_name}
+    PRE_BUILD
+    COMMAND echo " --- CUSTOM COMMAND ---"
+    COMMAND touch ${CMAKE_SOURCE_DIR}/test/main.cc
+    )
+
+set_target_properties(${project_name} PROPERTIES LINKER_LANGUAGE CXX)
+
+target_link_libraries(${project_name}
+    -Wl,-whole-archive -lenvoy-source-server -Wl,-no-whole-archive
+    -Wl,-whole-archive -lprotos-api -Wl,-no-whole-archive
+    -Wl,-whole-archive -ldl -Wl,-no-whole-archive
+    -Wl,-whole-archive -lnuma -Wl,-no-whole-archive
+    xxhash
+    envoy-source-common-memory
+    envoy-source-common-singleton
+    envoy-source-common-thread_local
+    -Wl,-whole-archive -lenvoy-source-common-ssl -Wl,-no-whole-archive
+    envoy-source-common-ratelimit
+    -Wl,-whole-archive -lenvoy-source-common-tcp -Wl,-no-whole-archive
+    -Wl,-whole-archive -lenvoy-source-common-upstream -Wl,-no-whole-archive
+    #redis
+    envoy-source-common-html
+    envoy-source-common-profiler
+    envoy-source-common-event
+    #network
+    envoy-source-common-json
+	yaml-cpp
+    envoy-source-common-filesystem
+    envoy-source-common-api
+    -Wl,-whole-archive -lenvoy-source-common-router -Wl,-no-whole-archive
+    #mongo
+    #dynamo
+    -Wl,-whole-archive -lenvoy-source-common-grpc -Wl,-no-whole-archive
+    envoy-source-common-stats
+    -Wl,-whole-archive -lenvoy-source-common-config -Wl,-no-whole-archive
+    -Wl,-whole-archive -lenvoy-source-common-http -Wl,-no-whole-archive
+    -Wl,-whole-archive -le-common -Wl,-no-whole-archive
+    #filter
+    #ext_authz
+    envoy-external-http-parser
+    envoy-source-common-request_info
+    envoy-source-common-tracing
+    -Wl,-whole-archive -llightstep_tracer -Wl,-no-whole-archive
+	-Wl,-whole-archive -lopentracing -Wl,-no-whole-archive
+    envoy-source-common-runtime
+    -Wl,-whole-archive -lenvoy-source-common-network -Wl,-no-whole-archive
+    nghttp2
+    -Wl,-whole-archive -lssl2 -Wl,-no-whole-archive
+    -Wl,-whole-archive -lcrypto2 -Wl,-no-whole-archive
+    # posix real-time extensions
+    rt
+    -Wl,-whole-archive -lenvoy-source-common-protobuf -Wl,-no-whole-archive
+    protobuf
+	absl_utility
+	absl_time
+	absl_memory
+	absl_synchronization
+	absl_algorithm
+	absl_bad_optional_access
+	absl_bad_any_cast
+	absl_span
+	absl_optional
+	absl_any
+	absl_strings
+	absl_int128
+	absl_numeric
+	absl_malloc_internal
+	absl_throw_delegate
+	absl_spinlock_wait
+	absl_base
+	absl_dynamic_annotations
+	absl_meta
+	absl_stacktrace
+	absl_leak_check
+	absl_debugging
+    cares
+    envoy-source-common-buffer
+    pthread
+    event_pthreads2
+    event_core2
+    event2
+    event_extra2
+    -Wl,-whole-archive -lenvoy-source-extensions -Wl,-no-whole-archive
+    -Wl,-whole-archive -lluajit -Wl,-no-whole-archive
+	envoy-external-grpc-httpjson-transcoding
+	envoy-source-common-compressor
+	envoy-source-common-decompressor
+    z
+    -lcircllhist
+    -lenvoy-source-common-tcp_proxy
+    -lenvoy-source-server-http
+    -lenvoy-source-common-access_log
+    -lenvoy-source-common-secret
+    -lenvoy-external-jwt_verify_lib
+    grpc++
+    -lfmt
+    # start test libs
+    envoy-test-common-api
+    envoy-test-common-buffer
+    envoy-test-common-compressor
+    envoy-test-common-config
+    envoy-test-common-decompressor
+    envoy-test-common-event
+    envoy-test-common-filesystem
+    envoy-test-common-grpc
+    envoy-test-common-html
+    envoy-test-common-http
+    envoy-test-common-http-http1
+    envoy-test-common-http-http2
+    envoy-test-common-json
+    envoy-test-common-protobuf
+    envoy-test-common-ratelimit
+    envoy-test-common-runtime
+    envoy-test-common-singleton
+    envoy-test-common-ssl
+    envoy-test-common-tcp_proxy
+    envoy-test-common-thread_local
+    envoy-test-common-tracing
+    envoy-test-common-upstream
+    envoy-test-config
+    envoy-test-config_test
+    envoy-test-coverage-gcc_only_test
+    envoy-test-exe
+    envoy-test-extensions
+    envoy-test-extensions-access_loggers-file
+    envoy-test-extensions-access_loggers-http_grpc
+    envoy-test-extensions-health_checkers-redis
+    envoy-test-extensions-stats_sinks-statsd
+    envoy-test-extensions-tracers-dynamic_ot
+    envoy-test-extensions-tracers-lightstep
+    envoy-test-extensions-tracers-zipkin
+    envoy-test-integration
+    envoy-test-mocks
+    envoy-test-mocks-access_log
+    envoy-test-mocks-api
+    envoy-test-mocks-buffer
+    envoy-test-mocks-config
+    envoy-test-mocks-event
+    envoy-test-mocks-filesystem
+    envoy-test-mocks-grpc
+    envoy-test-mocks-http
+    envoy-test-mocks-init
+    envoy-test-mocks-local_info
+    envoy-test-mocks-network
+    envoy-test-mocks-ratelimit
+    envoy-test-mocks-router
+    envoy-test-mocks-runtime
+    envoy-test-mocks-server
+    envoy-test-mocks-ssl
+    envoy-test-mocks-stats
+    envoy-test-mocks-thread_local
+    envoy-test-mocks-tracing
+    envoy-test-mocks-upstream
+    envoy-test-server
+    envoy-test-server-config_validation
+    envoy-test-server-http
+    envoy-test-test_common
+    envoy-test-test_common
+    envoy-test-tools-router_check-json
+    test-extensions-filters-common-ext_authz
+    test-extensions-filters-common-lua
+    test-extensions-filters-common-rbac
+    test-extensions-filters-http-buffer
+    test-extensions-filters-http-cors
+    test-extensions-filters-http-dynamo
+    test-extensions-filters-http-ext_authz
+    test-extensions-filters-http-fault
+    test-extensions-filters-http-grpc_http1_bridge
+    test-extensions-filters-http-grpc_json_transcoder
+    test-extensions-filters-http-grpc_web
+    test-extensions-filters-http-gzip
+    test-extensions-filters-http-health_check
+    test-extensions-filters-http-ip_tagging
+    test-extensions-filters-http-jwt_authn
+    test-extensions-filters-http-lua
+    test-extensions-filters-http-ratelimit
+    test-extensions-filters-http-rbac
+    test-extensions-filters-http-router
+    test-extensions-filters-http-squash
+    test-extensions-filters-listener-proxy_protocol
+    test-extensions-filters-network-client_ssl_auth
+    test-extensions-filters-network-ext_authz
+    test-extensions-filters-network-http_connection_manager
+    test-extensions-filters-network-mongo_proxy
+    test-extensions-filters-network-ratelimit
+    test-extensions-filters-network-redis_proxy
+    test-extensions-filters-network-tcp_proxy
+    test-extensions-stats_sinks-common-statsd
+    test-extensions-tracers-common-ot
+    #end test
+    gmock
+)
+
+add_dependencies(${project_name}
+    e-common
+    envoy-source-common-access_log
+    envoy-source-common-api
+    envoy-source-common-buffer
+    envoy-source-common-compressor
+    envoy-source-common-config
+    envoy-source-common-decompressor
+    envoy-source-common-event
+    envoy-source-common-filesystem
+    envoy-source-common-grpc
+    envoy-source-common-html
+    envoy-source-common-http
+    envoy-source-common-json
+    envoy-source-common-memory
+    envoy-source-common-network
+    envoy-source-common-profiler
+    envoy-source-common-protobuf
+    envoy-source-common-ratelimit
+    envoy-source-common-router
+    envoy-source-common-runtime
+    envoy-source-common-secret
+    envoy-source-common-singleton
+    envoy-source-common-ssl
+    envoy-source-common-stats
+    envoy-source-common-tcp
+    envoy-source-common-tcp_proxy
+    envoy-source-common-thread_local
+    envoy-source-common-tracing
+    envoy-source-common-upstream
+    envoy-source-exe-lib
+    envoy-source-extensions
+    envoy-source-server-http
+    envoy-source-server
+    envoy-test-common-api
+    envoy-test-common-buffer
+    envoy-test-common-compressor
+    envoy-test-common-config
+    envoy-test-common-decompressor
+    envoy-test-common-event
+    envoy-test-common-filesystem
+    envoy-test-common-grpc
+    envoy-test-common-html
+    envoy-test-common-http
+    envoy-test-common-http-http1
+    envoy-test-common-http-http2
+    envoy-test-common-json
+    envoy-test-common-protobuf
+    envoy-test-common-ratelimit
+    envoy-test-common-runtime
+    envoy-test-common-singleton
+    envoy-test-common-ssl
+    envoy-test-common-tcp_proxy
+    envoy-test-common-thread_local
+    envoy-test-common-tracing
+    envoy-test-common-upstream
+    envoy-test-config
+    envoy-test-config_test
+    envoy-test-coverage-gcc_only_test
+    envoy-test-exe
+    envoy-test-extensions
+    envoy-test-extensions-access_loggers-file
+    envoy-test-extensions-access_loggers-http_grpc
+    envoy-test-extensions-health_checkers-redis
+    envoy-test-extensions-stats_sinks-statsd
+    envoy-test-extensions-tracers-dynamic_ot
+    envoy-test-extensions-tracers-lightstep
+    envoy-test-extensions-tracers-zipkin
+    envoy-test-integration
+    envoy-test-mocks
+    envoy-test-mocks-access_log
+    envoy-test-mocks-api
+    envoy-test-mocks-buffer
+    envoy-test-mocks-config
+    envoy-test-mocks-event
+    envoy-test-mocks-filesystem
+    envoy-test-mocks-grpc
+    envoy-test-mocks-http
+    envoy-test-mocks-init
+    envoy-test-mocks-local_info
+    envoy-test-mocks-network
+    envoy-test-mocks-ratelimit
+    envoy-test-mocks-router
+    envoy-test-mocks-runtime
+    envoy-test-mocks-server
+    envoy-test-mocks-ssl
+    envoy-test-mocks-stats
+    envoy-test-mocks-thread_local
+    envoy-test-mocks-tracing
+    envoy-test-mocks-upstream
+    envoy-test-server
+    envoy-test-server-config_validation
+    envoy-test-server-http
+    envoy-test-test_common
+    envoy-test-test_common
+    envoy-test-tools-router_check-json
+    test-extensions-filters-common-ext_authz
+    test-extensions-filters-common-lua
+    test-extensions-filters-common-rbac
+    test-extensions-filters-http-buffer
+    test-extensions-filters-http-cors
+    test-extensions-filters-http-dynamo
+    test-extensions-filters-http-ext_authz
+    test-extensions-filters-http-fault
+    test-extensions-filters-http-grpc_http1_bridge
+    test-extensions-filters-http-grpc_json_transcoder
+    test-extensions-filters-http-grpc_web
+    test-extensions-filters-http-gzip
+    test-extensions-filters-http-health_check
+    test-extensions-filters-http-ip_tagging
+    test-extensions-filters-http-jwt_authn
+    test-extensions-filters-http-lua
+    test-extensions-filters-http-ratelimit
+    test-extensions-filters-http-rbac
+    test-extensions-filters-http-router
+    test-extensions-filters-http-squash
+    test-extensions-filters-listener-proxy_protocol
+    test-extensions-filters-network-client_ssl_auth
+    test-extensions-filters-network-ext_authz
+    test-extensions-filters-network-http_connection_manager
+    test-extensions-filters-network-mongo_proxy
+    test-extensions-filters-network-ratelimit
+    test-extensions-filters-network-redis_proxy
+    test-extensions-filters-network-tcp_proxy
+    test-extensions-stats_sinks-common-statsd
+    test-extensions-tracers-common-ot
+)
