@@ -3,7 +3,7 @@
 #define CIRCLLHIST_BRANCH "branches/master"
 #endif
 #ifndef CIRCLLHIST_VERSION
-#define CIRCLLHIST_VERSION "80fdcce6dbe2be1e50cfea3741670a0a6c766988.1546244678"
+#define CIRCLLHIST_VERSION "04981bd27723b82dba32ac2ed4914cd83bee1831.1546719885"
 #endif
 
 #include <stdio.h>

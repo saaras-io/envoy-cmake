@@ -23,6 +23,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 cmake_minimum_required(VERSION 3.0)
+
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+SET(BUILD_SHARED_LIBS OFF)
+SET(CMAKE_EXE_LINKER_FLAGS "-static")
+
 # XXX using 1.8.90 instead of 1.9.0-DEV
 project(nghttp2 VERSION 1.30.0)
 
@@ -328,6 +333,8 @@ else()
     extract_valid_c_flags(WARNCXXFLAGS  -Werror)
   endif()
 
+  extract_valid_c_flags(WARNCFLAGS    -Wl,-Bstatic)
+
   # For C compiler
   extract_valid_c_flags(WARNCFLAGS
     -Wall
@@ -383,6 +390,8 @@ else()
     -Wall
     -Wformat-security
   )
+
+  extract_valid_cxx_flags(WARNCXXFLAGS  -Wl,-Bstatic)
 endif()
 
 if(ENABLE_DEBUG)

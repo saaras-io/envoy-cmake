@@ -117,7 +117,7 @@ enable_testing()
 if (NOT LIB_PROTO_MUTATOR_CTEST_JOBS)
   ProcessorCount(LIB_PROTO_MUTATOR_CTEST_JOBS)
 endif()
-add_custom_target(check
+add_custom_target(check-libprotobuf-mutator
                   COMMAND ${CMAKE_CTEST_COMMAND} -j${LIB_PROTO_MUTATOR_CTEST_JOBS} --output-on-failure)
 
 add_subdirectory(src)

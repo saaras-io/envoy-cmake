@@ -87,18 +87,25 @@ link_directories(
     ${CMAKE_BINARY_DIR}/external/libprotobuf_mutator/src/libfuzzer
     ${CMAKE_BINARY_DIR}/external/lightstep-tracer-cpp
     ${CMAKE_BINARY_DIR}/external/opentracing-cpp
+    ${CMAKE_BINARY_DIR}/external/nghttp2-1.30.0/lib
     ${CMAKE_BINARY_DIR}/external/opentracing-cpp/mocktracer
     ${CMAKE_BINARY_DIR}/external/yaml-cpp
     ${CMAKE_SOURCE_DIR}/external/luajit-2.0/src
     ${CMAKE_SOURCE_DIR}/external/xxHash
     ${CMAKE_SOURCE_DIR}/external/libcircllhist/src
     ${CMAKE_BINARY_DIR}/api/
+    ${CMAKE_BINARY_DIR}/ev_lib/
     )
 
 add_library(sig_action STATIC ${CMAKE_CURRENT_SOURCE_DIR}/signal_action.cc)
 set_target_properties(sig_action PROPERTIES LINKER_LANGUAGE CXX)
 
 add_library(${project_name}-lib ${sources})
+
+#SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+#SET(BUILD_SHARED_LIBS OFF)
+#SET(CMAKE_EXE_LINKER_FLAGS "-static")
+
 add_executable(${project_name} ${sources})
 set_property(TARGET ${project_name} PROPERTY CXX_STANDARD 14)
 
@@ -122,6 +129,11 @@ add_custom_command(TARGET ${project_name}
     #Make sure we overwrite with the right version of libevent - the one without dpdk
     #COMMAND find ${ev_bin_external_le_dir}  -name \"lib*.so.*\"    -exec cp -f {} ${ev_lib_dir} '\;'
     )
+
+
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+SET(BUILD_SHARED_LIBS OFF)
+SET(CMAKE_EXE_LINKER_FLAGS "-static")
 
 # Note that while inspecting the descriptor pool for protobuf in validateProtoDescriptors()
 # some of the descriptors came up missing.
@@ -176,7 +188,7 @@ target_link_libraries(${project_name}
 	-Wl,-whole-archive -lopentracing -Wl,-no-whole-archive
     envoy-source-common-runtime
     -Wl,-whole-archive -lenvoy-source-common-network -Wl,-no-whole-archive
-    nghttp2
+    -Wl,-whole-archive -lnghttp2  -Wl,-no-whole-archive
     -Wl,-whole-archive -lssl2 -Wl,-no-whole-archive
     -Wl,-whole-archive -lcrypto2 -Wl,-no-whole-archive
     # posix real-time extensions
