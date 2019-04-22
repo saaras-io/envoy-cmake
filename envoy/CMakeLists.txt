@@ -84,6 +84,7 @@ add_custom_target(distclean
   COMMAND make -C ${CMAKE_SOURCE_DIR}/external/tclap/ clean
   COMMAND make -C ${CMAKE_SOURCE_DIR}/external/luajit-2.0/ clean
   COMMAND make -C ${CMAKE_SOURCE_DIR}/external/xxHash/ clean
+  COMMAND make -C ${CMAKE_SOURCE_DIR}/external/nghttp2-1.30.0 clean
   #COMMAND make -C ${CMAKE_SOURCE_DIR}/external/libevent/ clean
 )
 
