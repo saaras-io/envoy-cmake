@@ -58,4 +58,4 @@ foreach(SHARD RANGE ${TEST_SHARDS_MAX})
       GTEST_TOTAL_SHARDS=${TEST_SHARDS_COUNT})
 endforeach(SHARD)
 
-add_dependencies(check mutator_test)
+add_dependencies(check-libprotobuf-mutator mutator_test)
