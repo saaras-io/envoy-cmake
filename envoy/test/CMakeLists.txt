@@ -6,14 +6,9 @@ set(project_name    envoy-test)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++1y -Wl,-V")
 add_definitions(${CMAKE_C_FLAGS})
 
-set(test_common_lib_path        ${CMAKE_BINARY_DIR}/e/test/test_common/)
-set(ev_test_binary_root_dir		${CMAKE_BINARY_DIR}/e/test/)
-set(sig_action_lib_path         ${CMAKE_BINARY_DIR}/e/source/exe/)
-
-set(rsync_cmd                   rsync -auv)
-
 link_directories(
     ${CMAKE_SOURCE_DIR}/ext-libs
+    ${CMAKE_BINARY_DIR}/ev_lib
     ${CMAKE_BINARY_DIR}/source/common/access_log
     ${CMAKE_BINARY_DIR}/source/common/api
     ${CMAKE_BINARY_DIR}/source/common/buffer
@@ -90,6 +85,7 @@ link_directories(
     ${CMAKE_SOURCE_DIR}/external/libcircllhist/src
     ${CMAKE_BINARY_DIR}/external/googletest/googlemock/
     ${CMAKE_BINARY_DIR}/api/
+    ${CMAKE_BINARY_DIR}/ev_lib/
 )
 
 #add_subdirectory(proto)
